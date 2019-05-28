@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>ajax</title>
+		<link rel="stylesheet" href="" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lte IE 8]>
+			<script src="../../js/html5shiv.js" type="text/javascript" charset="utf-8"></script>
+			<script src="../../js/respond.min.js" type="text/javascript" charset="utf-8"></script>
+		<![endif]-->
+
+		<style type="text/css">
+			@charset "utf-8";
+			body {
+				padding: 10px;
+			}
+			
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			ul {
+				list-style: none;
+			}
+			
+			.clearfix:before,
+			.clearfix:after {
+				display: table;
+				content: "";
+			}
+			
+			.clearfix:after {
+				clear: both;
+			}
+			
+			.active {
+				font-size: 28px;
+				color: darkgoldenrod;
+			}
+			
+			.width {
+				position: relative;
+				box-sizing: border-box;
+				width: 250px;
+				height: 200px;
+				padding: 20px;
+				border: #3C763D solid 20px;
+				bottom left: 30px;
+			}
+			
+			ul li {
+				border-bottom: 1px solid red;
+			}
+			
+			.box {
+				border: 1px solid red;
+			}
+			
+			h1 {
+				display: none;
+			}
+			
+			.animate {
+				width: 100px;
+				height: 100px;
+				margin-top: 20px;
+				background: orange;
+			}
+			
+			@keyframes dh {
+				from {
+					transform: rotate(0);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			}
+			
+			button:not(.btn) {
+				color: red;
+			}
+
+			.client{
+				width: 200px;
+				height: 200px;
+				padding: 10px;
+			box-sizing: border-box;
+				border: 10px solid;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="abc" data-id>
+			<button class="btn  get" type="button">get</button>
+			<button class="btn  post" type="button">post</button>
+			<button class="btn   put" type="button">put</button>
+			<button class="btn  delete" type="button">delete</button>
+
+		</div>
+
+		<div class="client">
+
+		</div>
+
+	<script src="../mobile.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script> -->
+		<script type="text/javascript">
+
+			var url="http://localhost:3000/test"
+			$(".get").click(function() {
+					$.get(url,{
+						name:"12345",
+						null:null,
+						undefined:undefined,
+						temp:"",
+						dt:new Date(),
+						pwd:"123456",
+						obj:{
+							a:1,
+							age:20,
+
+							obj2:{
+								c:11,
+								age:22,
+								null:null,
+						undefined:undefined,
+							},
+							
+						},
+						arrs:[
+								{
+									c:1,age:22
+								},
+								{
+									c:222,
+									age:222,
+								
+								},
+							],
+							arrs2:[1,2,4,{pp:"99"},[1,2,5]]
+					},function(data){
+						console.log("data",data.data)
+					},function(){
+						alert("网络加载失败！")
+					})
+			
+			});
+					
+			$(".post").click(function() {
+					$.post(url,{
+						name:"admin",
+						null:null,
+						undefined:undefined,
+						temp:"",
+						dt:new Date(),
+						pwd:"123456",
+						obj:{
+							a:1,
+							age:20,
+
+							obj2:{
+								c:11,
+								age:22,
+								null:null,
+						undefined:undefined,
+							},
+							
+						},
+						arrs:[
+								{
+									c:1,age:22
+								},
+								{
+									c:222,
+									age:222,
+								
+								},
+							],
+							arrs2:[1,2,4,{pp:"99"},[1,2,5]]
+					},function(data){
+						console.log("data",data.data)
+					},function(){
+						alert("网络加载失败！")
+					})
+			
+			});
+				
+
+			$(".put").click(function() {
+					$.put(url,{
+						_id:"5ce361f793843512d47baf68",
+						name:"admin",
+						pwd:"8888888888",
+						dt:new Date()
+
+						
+					},function(data){
+						console.log("data",data.data)
+					}
+					,function(){
+						alert("网络加载失败！")
+					})
+			
+			});
+
+			
+			$(".delete").click(function() {
+					$.delete(url,{
+						name:"admin",
+						
+					},function(data){
+						console.log("data",data.data)
+					},function(){
+						alert("网络加载失败！")
+					})
+			
+			});
+					
+	
+			function jsonp(url, data) {
+				
+					var callback;
+					if(typeof data === "function") {
+						callback = data;
+					}
+					if(arguments.length >= 3) {
+						callback = arguments[2];
+					}
+
+					// 创建一个几乎唯一的id
+					var callbackName = "mobile" + (new Date()).getTime().toString().trim();
+					window[callbackName] = function(result) {
+
+						// 创建一个全局回调处理函数
+						if(typeof callback === "function") {
+							callback(result);
+						}
+					}
+
+					// 参数data对象字符
+					var params = [];
+					var postData = "";
+					if(typeof data === "object") {
+
+						for(var key in data) {
+							params.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+						}
+						postData = params && params.join('&');
+
+					}
+
+					if(postData.length > 0) {
+						postData = "&" + postData;
+					}
+					url = url.indexOf("?") === -1 ? url + "?" + "callback=" + callbackName + postData : url + "&callback=" + callbackName + postData;
+
+					// 创建Script标签并执行window[id]函数
+					var script = document.createElement("script");
+					script.setAttribute("id", callbackName);
+					script.setAttribute("src", url);
+					script.setAttribute("type", "text/javascript");
+					document.body.appendChild(script);
+				
+			}
+
+		
+		</script>
+	</body>
+
+</html>

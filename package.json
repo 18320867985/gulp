@@ -8,14 +8,9 @@
     "test": "node test",
     "start": "node app.js",
     "del": "gulp  del",
-    "dev": " gulp watch",
-    "build": " gulp del && gulp release",
-    "dev-cdn": "gulp dev-cdn && gulp watch",
-    "build-cdn": "gulp del && gulp build-cdn && gulp release",
-    "gulp-dev": "  gulp gulp-dev && gulp gulp-watch",
-    "gulp-build": " gulp del && gulp gulp-build ",
-    "rollup-dev": "  gulp rollup-dev && gulp rollup-watch",
-    "rollup-build": " gulp del && gulp rollup-build "
+    "dev": "  gulp gulp-dev && gulp gulp-watch",
+    "build": " gulp del && gulp gulp-build "
+   
   },
   "license": "ISC",
   "dependencies": {
