@@ -36,8 +36,6 @@ var eslint = require("gulp-eslint"); // 检查es5 ees6 js gulp-eshint
 var less = require("gulp-less");
 
 
-
-
 // 清空目录gulp-del
 gulp.task('del', function (cd) {
 
