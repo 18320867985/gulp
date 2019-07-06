@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
-    "\\src\\mobile",
-    "\\src\\mobile\\demo\\js"
+    "\\src"
   ],
-  "SelectedNode": "\\src\\mobile\\jquery-1.11.0.js",
   "PreviewInSolutionExplorer": false
 }
