@@ -11,3 +11,6 @@
 
 # Visual Studio  Dependency directory
 /.vs
+
+*.suo
+*.slnx.sqlite
